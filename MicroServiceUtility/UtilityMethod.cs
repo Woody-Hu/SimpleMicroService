@@ -18,13 +18,21 @@ namespace MicroServiceUtility
         /// <param name="inputPort"></param>
         public static void RegiestedService(string inputApplicationName,string inputServiceApi,string inputHost,int inputPort)
         {
-            HttpClient tempClient = new HttpClient();
+            try
+            {
+                HttpClient tempClient = new HttpClient();
 
-            //配置Uri
-            string tempUri = inputServiceApi + "?" + "serviceName=" + inputApplicationName 
-                + "&" + "hostName=" + inputHost + "&" + "port=" + inputPort.ToString();
+                //配置Uri
+                string tempUri = inputServiceApi + "?" + "serviceName=" + inputApplicationName
+                    + "&" + "hostName=" + inputHost + "&" + "port=" + inputPort.ToString();
 
-            var tempResult = tempClient.GetAsync(tempUri).Result;
+                var tempResult = tempClient.GetAsync(tempUri).Result;
+            }
+            catch (Exception)
+            {
+                ;
+            }
+       
         }
     }
 }
