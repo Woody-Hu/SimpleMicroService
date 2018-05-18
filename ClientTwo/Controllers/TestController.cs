@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MicroServiceUtility;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -11,7 +12,17 @@ namespace ClientTwo.Controllers
     {
         public string Get()
         {
-            return "BB";
+
+            MicroServiceProxyClient tempClient = new MicroServiceProxyClient("http://localhost:2271/dynamicApi");
+
+            string testValue;
+
+
+
+            bool tag = tempClient.TryGetResult<string>("test", "api/Test", new List<KeyValuePair<string, string>>(), out testValue);
+
+
+            return "BB" + testValue;
         }
     }
 }
